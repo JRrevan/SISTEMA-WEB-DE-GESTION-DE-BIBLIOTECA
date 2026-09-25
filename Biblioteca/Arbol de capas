@@ -6,7 +6,7 @@ IPC2_Proy02_202602_#Carnet/            (nombre exigido para el repositorio)
     │
     ├── CAPA 1 · PRESENTACIÓN
     │   ├── Controllers/
-    │   │   ├── HomeController         menú principal y Ayuda (datos del estudiante + link a docs)
+    │   │   ├── HomeController ✅        menú principal y Ayuda (datos del estudiante + link a docs)
     │   │   ├── CargaController        inicialización y carga de XML
     │   │   ├── CategoriasController   mostrar estructura, gráfico de libros, agregar categoría
     │   │   └── LibrosController       registrar, eliminar, menor/mayor ISBN, buscar por ISBN
@@ -14,30 +14,30 @@ IPC2_Proy02_202602_#Carnet/            (nombre exigido para el repositorio)
     │   └── wwwroot/graficos/          imágenes generadas por Graphviz
     │
     ├── CAPA 2 · SERVICIOS
-    │   ├── CatalogoService            fachada única (singleton) que guarda el Catalogo en memoria
+    │   ├── CatalogoService ✅           fachada única (singleton) que guarda el Catalogo en memoria
     │   ├── CargaXmlService            aplica un XML al catálogo, de forma incremental
     │   └── GraphvizService            pide el DOT al generador y lo convierte en imagen
     │
     ├── CAPA 3 · DOMINIO
-    │   ├── Catalogo                   raíz, índice de categorías, índice global de libros
-    │   ├── Categoria                 isbn (long), titulo, autor, categoria
-    │   └── ResultadoCarga               nombre, padre, hijos, libros
-    │   ├── Libro                     contadores, éxito/error y mensajes
+    │   ├── Catalogo   ✅                 raíz, índice de categorías, índice global de libros
+    │   ├── Categoria ✅                 isbn (long), titulo, autor, categoria
+    │   └── ResultadoCarga ✅              nombre, padre, hijos, libros
+    │   ├── Libro ✅                     contadores, éxito/error y mensajes
     │
     ├── CAPA 4 · TDAs
-    │   ├── NodoAVLLibro
-    │   ├── ArbolAVLLibros             clave ISBN: insertar, buscar, eliminar, min, max, inorden
-    │   ├── NodoAVLCategoria
-    │   ├── ArbolAVLCategorias         clave nombre: insertar, buscar, inorden alfabético
-    │   ├── NodoMensaje
-    │   ├── ListaMensajes              lista enlazada simple para errores y avisos de la carga
-    |   ├── NodoListaLibro
-    |   ├── ListaCategorias
-    |   ├── NodoListaCategoria
-    │   └── ListaLibros
+    │   ├── NodoAVLLibro ✅
+    │   ├── ArbolAVLLibros ✅            clave ISBN: insertar, buscar, eliminar, min, max, inorden 
+    │   ├── NodoAVLCategoria ✅
+    │   ├── ArbolAVLCategorias ✅        clave nombre: insertar, buscar, inorden alfabético
+    │   ├── NodoMensaje ✅
+    │   ├── ListaMensajes ✅             lista enlazada simple para errores y avisos de la carga
+    |   ├── NodoListaLibro ✅
+    |   ├── ListaCategorias✅
+    |   ├── NodoListaCategoria ✅
+    │   └── ListaLibros ✅
     |
     └── CAPA 5 · INFRAESTRUCTURA
-        ├── LectorXmlEntrada           recorre el XML con XmlReader, sin guardarlo en colecciones
+        ├── LectorXmlEntrada ✅          recorre el XML con XmlReader, sin guardarlo en colecciones
         ├── GeneradorDot               arma el texto DOT (estructura y libros por categoría)
         ├── EjecutorGraphviz           lanza el ejecutable `dot` con Process
-        └── Validador                  ISBN numérico, textos no vacíos, comparación alfabética
+        └── Validador ✅                  ISBN numérico, textos no vacíos, comparación alfabética

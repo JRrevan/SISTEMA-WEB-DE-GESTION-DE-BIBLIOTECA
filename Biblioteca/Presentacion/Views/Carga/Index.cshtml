@@ -1,0 +1,65 @@
+@{
+    ViewData["Title"] = "Carga de Catálogo XML";
+    Layout = "~/Presentacion/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row mt-4">
+    <div class="col-md-8 offset-md-2">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">Cargar Archivo XML</h4>
+            </div>
+            <div class="card-body">
+                <!-- El enctype es obligatorio para poder enviar archivos al servidor -->
+                <form asp-controller="Carga" asp-action="Index" method="post" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="archivoXml" class="form-label">Seleccione el archivo de configuración incremental:</label>
+                        <input class="form-control" type="file" id="archivoXml" name="archivoXml" accept=".xml" required>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100">Procesar Archivo</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Alerta en caso de no adjuntar archivo -->
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger mt-3">
+                @ViewBag.Error
+            </div>
+        }
+
+        <!-- Renderizado del reporte de carga -->
+        @if (ViewBag.Exito != null)
+        {
+            <div class="alert alert-info mt-3">
+                @ViewBag.Exito
+            </div>
+            
+            @if (ViewBag.Mensajes != null && !ViewBag.Mensajes.EstaVacia)
+            {
+                <div class="card mt-3">
+                    <div class="card-header bg-secondary text-white">
+                        Reporte de Carga (Errores y Éxitos)
+                    </div>
+                    <!-- Contenedor con scroll para no saturar la pantalla si hay miles de registros -->
+                    <ul class="list-group list-group-flush" style="max-height: 400px; overflow-y: auto;">
+                        @{
+                            // Recorremos el TDA ListaMensajes usando sus apuntadores
+                            var actual = ViewBag.Mensajes.Primero;
+                            while (actual != null)
+                            {
+                                // Asignamos un color verde o rojo dependiendo del texto
+                                string claseAlerta = actual.Texto.StartsWith("Error") ? "list-group-item-danger" : "list-group-item-success";
+                                <li class="list-group-item @claseAlerta">
+                                    @actual.Texto
+                                </li>
+                                actual = actual.Siguiente;
+                            }
+                        }
+                    </ul>
+                </div>
+            }
+        }
+    </div>
+</div>

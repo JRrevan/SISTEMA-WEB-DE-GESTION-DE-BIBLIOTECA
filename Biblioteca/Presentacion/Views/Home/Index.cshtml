@@ -1,0 +1,43 @@
+@{
+    ViewData["Title"] = "Inicio";
+    // Usamos el layout compartido
+    Layout = "~/Presentacion/Views/Shared/_Layout.cshtml";
+}
+
+<div class="text-center mt-5">
+    <h1 class="display-4">Bienvenido al Sistema de Biblioteca</h1>
+    <p class="lead">Gestión inteligente del catálogo de libros y categorías.</p>
+</div>
+
+<div class="row justify-content-center mt-4">
+    <div class="col-md-6 text-center">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Estado del Catálogo</h5>
+                <!-- Mostramos las estadísticas que enviamos desde el HomeController usando ViewBag -->
+                <p class="card-text">
+                    <strong>Total de Categorías:</strong> @ViewBag.TotalCategorias <br />
+                    <strong>Total de Libros:</strong> @ViewBag.TotalLibros
+                </p>
+                
+                <hr />
+                
+                <!-- Botón para el Requerimiento a: Inicialización -->
+                <form asp-controller="Home" asp-action="InicializarSistema" method="post" 
+                      onsubmit="return confirm('¿Estás seguro de que deseas borrar toda la información actual e inicializar el sistema?');">
+                    <button type="submit" class="btn btn-danger w-100">
+                        Inicializar Sistema (Borrar Todo)
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Alerta para mostrar el mensaje de éxito si venimos de inicializar -->
+@if (TempData["MensajeExito"] != null)
+{
+    <div class="alert alert-success mt-4 text-center" role="alert">
+        @TempData["MensajeExito"]
+    </div>
+}
