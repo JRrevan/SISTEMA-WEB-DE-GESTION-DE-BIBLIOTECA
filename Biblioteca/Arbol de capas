@@ -32,7 +32,9 @@ IPC2_Proy02_202602_#Carnet/            (nombre exigido para el repositorio)
     │   ├── NodoMensaje
     │   ├── ListaMensajes              lista enlazada simple para errores y avisos de la carga
     |   ├── NodoListaLibro
-    │   └── ListaLibros 
+    |   ├── ListaCategorias
+    |   ├── NodoListaCategoria
+    │   └── ListaLibros
     |
     └── CAPA 5 · INFRAESTRUCTURA
         ├── LectorXmlEntrada           recorre el XML con XmlReader, sin guardarlo en colecciones

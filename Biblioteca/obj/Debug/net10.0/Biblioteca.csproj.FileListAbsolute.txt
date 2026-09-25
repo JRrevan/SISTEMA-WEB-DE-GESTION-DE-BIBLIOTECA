@@ -1,0 +1,15 @@
+C:\Users\river\OneDrive\Documentos\GitHub\IPC2_Proy02_202602_202400128\Biblioteca\bin\Debug\net10.0\Biblioteca.exe
+C:\Users\river\OneDrive\Documentos\GitHub\IPC2_Proy02_202602_202400128\Biblioteca\bin\Debug\net10.0\Biblioteca.deps.json
+C:\Users\river\OneDrive\Documentos\GitHub\IPC2_Proy02_202602_202400128\Biblioteca\bin\Debug\net10.0\Biblioteca.runtimeconfig.json
+C:\Users\river\OneDrive\Documentos\GitHub\IPC2_Proy02_202602_202400128\Biblioteca\bin\Debug\net10.0\Biblioteca.dll
+C:\Users\river\OneDrive\Documentos\GitHub\IPC2_Proy02_202602_202400128\Biblioteca\bin\Debug\net10.0\Biblioteca.pdb
+C:\Users\river\OneDrive\Documentos\GitHub\IPC2_Proy02_202602_202400128\Biblioteca\obj\Debug\net10.0\Biblioteca.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\river\OneDrive\Documentos\GitHub\IPC2_Proy02_202602_202400128\Biblioteca\obj\Debug\net10.0\Biblioteca.AssemblyInfoInputs.cache
+C:\Users\river\OneDrive\Documentos\GitHub\IPC2_Proy02_202602_202400128\Biblioteca\obj\Debug\net10.0\Biblioteca.AssemblyInfo.cs
+C:\Users\river\OneDrive\Documentos\GitHub\IPC2_Proy02_202602_202400128\Biblioteca\obj\Debug\net10.0\Biblioteca.csproj.CoreCompileInputs.cache
+C:\Users\river\OneDrive\Documentos\GitHub\IPC2_Proy02_202602_202400128\Biblioteca\obj\Debug\net10.0\Biblioteca.sourcelink.json
+C:\Users\river\OneDrive\Documentos\GitHub\IPC2_Proy02_202602_202400128\Biblioteca\obj\Debug\net10.0\Biblioteca.dll
+C:\Users\river\OneDrive\Documentos\GitHub\IPC2_Proy02_202602_202400128\Biblioteca\obj\Debug\net10.0\refint\Biblioteca.dll
+C:\Users\river\OneDrive\Documentos\GitHub\IPC2_Proy02_202602_202400128\Biblioteca\obj\Debug\net10.0\Biblioteca.pdb
+C:\Users\river\OneDrive\Documentos\GitHub\IPC2_Proy02_202602_202400128\Biblioteca\obj\Debug\net10.0\Biblioteca.genruntimeconfig.cache
+C:\Users\river\OneDrive\Documentos\GitHub\IPC2_Proy02_202602_202400128\Biblioteca\obj\Debug\net10.0\ref\Biblioteca.dll
