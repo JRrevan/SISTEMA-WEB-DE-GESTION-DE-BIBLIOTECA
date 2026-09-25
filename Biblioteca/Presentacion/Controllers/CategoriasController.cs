@@ -7,10 +7,12 @@ namespace Biblioteca.Presentacion.Controllers
     public class CategoriasController : Controller
     {
         private readonly CatalogoService _catalogoService;
+        private readonly GraphvizService _graphvizService;
 
-        public CategoriasController(CatalogoService catalogoService)
+        public CategoriasController(CatalogoService catalogoService, GraphvizService graphvizService)
         {
             _catalogoService = catalogoService;
+            _graphvizService = graphvizService;
         }
 
         [HttpGet]
@@ -39,6 +41,35 @@ namespace Biblioteca.Presentacion.Controllers
         [HttpGet]
         public IActionResult Crear()
         {
+            return View();
+        }
+        
+        [HttpGet]
+        public IActionResult GraficoGeneral()
+        {
+            var raiz = _catalogoService.CatalogoPrincipal.Raiz;
+            ViewBag.RutaSvg = _graphvizService.GenerarGraficoCategorias(raiz);
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult GraficoLibros(string subcategoria)
+        {
+            if (string.IsNullOrWhiteSpace(subcategoria))
+            {
+                TempData["Error"] = "Debe especificar una categoría para graficar sus libros.";
+                return RedirectToAction("Index");
+            }
+
+            var categoria = _catalogoService.CatalogoPrincipal.BuscarCategoria(subcategoria);
+            if (categoria == null)
+            {
+                TempData["Error"] = $"La categoría '{subcategoria}' no existe.";
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.NombreCategoria = categoria.Nombre;
+            ViewBag.RutaSvg = _graphvizService.GenerarGraficoLibrosCategoria(categoria);
             return View();
         }
 

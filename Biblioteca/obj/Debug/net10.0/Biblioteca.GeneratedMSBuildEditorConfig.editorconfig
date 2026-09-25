@@ -31,8 +31,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UHJlc2VudGFjaW9uXFZpZXdzXENhdGVnb3JpYXNcQ3JlYXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/river/OneDrive/Documentos/GitHub/IPC2_Proy02_202602_202400128/Biblioteca/Presentacion/Views/Categorias/GraficoGeneral.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJlc2VudGFjaW9uXFZpZXdzXENhdGVnb3JpYXNcR3JhZmljb0dlbmVyYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/river/OneDrive/Documentos/GitHub/IPC2_Proy02_202602_202400128/Biblioteca/Presentacion/Views/Categorias/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UHJlc2VudGFjaW9uXFZpZXdzXENhdGVnb3JpYXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/river/OneDrive/Documentos/GitHub/IPC2_Proy02_202602_202400128/Biblioteca/Presentacion/Views/Home/Ayuda.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJlc2VudGFjaW9uXFZpZXdzXEhvbWVcQXl1ZGEuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/river/OneDrive/Documentos/GitHub/IPC2_Proy02_202602_202400128/Biblioteca/Presentacion/Views/Home/Index.cshtml]
@@ -49,4 +57,8 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/river/OneDrive/Documentos/GitHub/IPC2_Proy02_202602_202400128/Biblioteca/Presentacion/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UHJlc2VudGFjaW9uXFZpZXdzXFNoYXJlZFxfTGF5b3V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/river/OneDrive/Documentos/GitHub/IPC2_Proy02_202602_202400128/Biblioteca/Presentacion/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJlc2VudGFjaW9uXFZpZXdzXF9WaWV3SW1wb3J0cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

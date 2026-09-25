@@ -1,7 +1,7 @@
 @model Biblioteca.Dominio.Categoria
 @{
     ViewData["Title"] = "Estructura de Categorías";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Presentacion/Views/Shared/_Layout.cshtml";
 
     // Función local recursiva para renderizar las subcategorías utilizando los apuntadores de tu TDA
     void RenderArbol(Biblioteca.Dominio.Categoria categoriaActual)
@@ -29,6 +29,16 @@
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h2>Organización del Catálogo</h2>
     <a asp-action="Crear" class="btn btn-primary">Agregar Categoría</a>
+</div>
+
+<div class="mb-4">
+    <a asp-controller="Categorias" asp-action="GraficoGeneral" class="btn btn-info text-white me-2">Ver Gráfico Global del Catálogo</a>
+    
+    <!-- Botón para graficar los libros de la categoría actual (si se partió de una subcategoría) -->
+    @if (Model != null && Model.Padre != null)
+    {
+        <a asp-controller="Categorias" asp-action="GraficoLibros" asp-route-subcategoria="@Model.Nombre" class="btn btn-warning">Graficar Libros de '@Model.Nombre'</a>
+    }
 </div>
 
 @if (TempData["Exito"] != null) { <div class="alert alert-success">@TempData["Exito"]</div> }

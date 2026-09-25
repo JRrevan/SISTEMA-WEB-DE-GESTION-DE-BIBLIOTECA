@@ -16,7 +16,9 @@ namespace Biblioteca.Presentacion.Controllers
         public IActionResult Index(long? isbnBusqueda)
         {
             var indice = _catalogoService.CatalogoPrincipal.IndiceLibros;
-            
+
+            ViewBag.Libros = indice.ObtenerAscendente();
+
             // Requerimiento: Mostrar el menor y el mayor ISBN
             ViewBag.Minimo = indice.Minimo(); 
             ViewBag.Maximo = indice.Maximo();

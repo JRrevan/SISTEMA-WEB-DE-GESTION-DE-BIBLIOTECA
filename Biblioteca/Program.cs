@@ -21,8 +21,8 @@ namespace Biblioteca
 
             // 2. REGISTRAR TU SERVICIO COMO SINGLETON (Crucial para mantener los datos)
             builder.Services.AddSingleton<CatalogoService>();
-            builder.Services.AddSingleton<CatalogoService>();
             builder.Services.AddScoped<CargaXmlService>();
+            builder.Services.AddScoped<GraphvizService>();
 
             var app = builder.Build();
 

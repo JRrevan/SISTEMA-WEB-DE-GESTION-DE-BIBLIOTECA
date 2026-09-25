@@ -35,5 +35,14 @@ namespace Biblioteca.Controllers
             // Redirige de vuelta a la página principal
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public IActionResult Ayuda()
+        {
+            return View();
+        }
+
     }
+
+
 }

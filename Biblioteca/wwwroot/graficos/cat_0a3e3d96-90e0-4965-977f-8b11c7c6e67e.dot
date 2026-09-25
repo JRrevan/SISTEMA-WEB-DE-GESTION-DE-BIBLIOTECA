@@ -1,0 +1,10 @@
+digraph EstructuraCategorias {
+  node [shape=box, style=filled, fillcolor=lightblue, fontname="Arial"];
+  "__RAIZ__" -> "Ciencia";
+  "Ciencia" -> "Fisica";
+  "Ciencia" -> "Matematicas";
+  "__RAIZ__" -> "Literatura";
+  "__RAIZ__" -> "Tecnologia";
+  "Tecnologia" -> "Bases de Datos";
+  "Tecnologia" -> "Programacion";
+}
