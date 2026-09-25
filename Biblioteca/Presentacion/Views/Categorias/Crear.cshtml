@@ -1,0 +1,33 @@
+@{
+    ViewData["Title"] = "Agregar Categoría";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row mt-4">
+    <div class="col-md-6 offset-md-3">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">Registrar Nueva Categoría</h4>
+            </div>
+            <div class="card-body">
+                <form asp-action="Crear" method="post">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre de la Categoría</label>
+                        <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Ej. Ciencia Ficción" required />
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="padre" class="form-label">Categoría Padre (Opcional)</label>
+                        <input type="text" id="padre" name="padre" class="form-control" placeholder="Dejar en blanco si es categoría principal" />
+                        <div class="form-text">Si ingresas un padre, este debe existir previamente en el árbol para poder enlazarse[cite: 7].</div>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mt-4">
+                        <a asp-action="Index" class="btn btn-secondary">Cancelar y Volver</a>
+                        <button type="submit" class="btn btn-success">Guardar Categoría</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

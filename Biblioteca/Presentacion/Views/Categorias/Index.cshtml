@@ -1,0 +1,61 @@
+@model Biblioteca.Dominio.Categoria
+@{
+    ViewData["Title"] = "Estructura de Categorías";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    // Función local recursiva para renderizar las subcategorías utilizando los apuntadores de tu TDA
+    void RenderArbol(Biblioteca.Dominio.Categoria categoriaActual)
+    {
+        var hijas = categoriaActual.Hijos.ObtenerOrdenadas();
+        if (hijas != null && hijas.Cantidad > 0)
+        {
+            <ul>
+                @{
+                    var nodoHijo = hijas.Primero;
+                    while (nodoHijo != null)
+                    {
+                        <li>
+                            <strong>@nodoHijo.Dato.Nombre</strong>
+                            @{ RenderArbol(nodoHijo.Dato); }
+                        </li>
+                        nodoHijo = nodoHijo.Siguiente;
+                    }
+                }
+            </ul>
+        }
+    }
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Organización del Catálogo</h2>
+    <a asp-action="Crear" class="btn btn-primary">Agregar Categoría</a>
+</div>
+
+@if (TempData["Exito"] != null) { <div class="alert alert-success">@TempData["Exito"]</div> }
+@if (ViewBag.Error != null) { <div class="alert alert-danger">@ViewBag.Error</div> }
+
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <form asp-action="Index" method="get" class="d-flex">
+            <input type="text" name="subcategoria" class="form-control me-2" placeholder="Nombre de categoría base (dejar vacío para raíz global)" />
+            <button type="submit" class="btn btn-secondary">Partir desde Subcategoría</button>
+        </form>
+    </div>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h5>
+            @(Model.Padre == null ? "Raíz del Catálogo" : $"Vista partiendo desde: {Model.Nombre}")
+        </h5>
+        <hr />
+        <div style="max-height: 500px; overflow-y: auto; font-family: monospace; font-size: 1.1em;">
+            <ul>
+                <li>
+                    <strong>@(Model.Padre == null ? "Catálogo Global" : Model.Nombre)</strong>
+                    @{ RenderArbol(Model); }
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -27,8 +27,24 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = UHJlc2VudGFjaW9uXFZpZXdzXENhcmdhXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/river/OneDrive/Documentos/GitHub/IPC2_Proy02_202602_202400128/Biblioteca/Presentacion/Views/Categorias/Crear.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJlc2VudGFjaW9uXFZpZXdzXENhdGVnb3JpYXNcQ3JlYXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/river/OneDrive/Documentos/GitHub/IPC2_Proy02_202602_202400128/Biblioteca/Presentacion/Views/Categorias/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJlc2VudGFjaW9uXFZpZXdzXENhdGVnb3JpYXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/river/OneDrive/Documentos/GitHub/IPC2_Proy02_202602_202400128/Biblioteca/Presentacion/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UHJlc2VudGFjaW9uXFZpZXdzXEhvbWVcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/river/OneDrive/Documentos/GitHub/IPC2_Proy02_202602_202400128/Biblioteca/Presentacion/Views/Libros/Crear.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJlc2VudGFjaW9uXFZpZXdzXExpYnJvc1xDcmVhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/river/OneDrive/Documentos/GitHub/IPC2_Proy02_202602_202400128/Biblioteca/Presentacion/Views/Libros/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJlc2VudGFjaW9uXFZpZXdzXExpYnJvc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/river/OneDrive/Documentos/GitHub/IPC2_Proy02_202602_202400128/Biblioteca/Presentacion/Views/Shared/_Layout.cshtml]
