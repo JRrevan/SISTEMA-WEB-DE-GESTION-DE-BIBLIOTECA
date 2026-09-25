@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Biblioteca.Servicios;
 using Biblioteca.Dominio;
+using System.Collections.Generic;
 
 namespace Biblioteca.Presentacion.Controllers
 {
@@ -35,20 +36,42 @@ namespace Biblioteca.Presentacion.Controllers
                 nodoInicio = _catalogoService.CatalogoPrincipal.Raiz;
             }
 
+            ViewBag.Categorias = ObtenerCategorias();
+            ViewBag.CategoriaSeleccionada = subcategoria;
             return View(nodoInicio);
         }
 
         [HttpGet]
         public IActionResult Crear()
         {
+            ViewBag.Categorias = ObtenerCategorias();
             return View();
         }
         
         [HttpGet]
-        public IActionResult GraficoGeneral()
+        public IActionResult GraficoGeneral(string subcategoria = null)
         {
             var raiz = _catalogoService.CatalogoPrincipal.Raiz;
+            if (!string.IsNullOrWhiteSpace(subcategoria))
+            {
+                raiz = _catalogoService.CatalogoPrincipal.BuscarCategoria(subcategoria);
+                if (raiz == null)
+                {
+                    TempData["Error"] = $"La categoría '{subcategoria}' no existe.";
+                    return RedirectToAction("Index");
+                }
+            }
+
+            ViewBag.NombreRaizGrafico = raiz.Nombre;
             ViewBag.RutaSvg = _graphvizService.GenerarGraficoCategorias(raiz);
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult GraficoArbolLibros()
+        {
+            ViewBag.RutaSvg = _graphvizService.GenerarGraficoArbolLibros(
+                _catalogoService.CatalogoPrincipal.IndiceLibros);
             return View();
         }
 
@@ -71,6 +94,21 @@ namespace Biblioteca.Presentacion.Controllers
             ViewBag.NombreCategoria = categoria.Nombre;
             ViewBag.RutaSvg = _graphvizService.GenerarGraficoLibrosCategoria(categoria);
             return View();
+        }
+
+        private List<Categoria> ObtenerCategorias()
+        {
+            var resultado = new List<Categoria>();
+            var categorias = _catalogoService.CatalogoPrincipal.IndiceCategorias.ObtenerOrdenadas();
+            var actual = categorias.Primero;
+
+            while (actual != null)
+            {
+                resultado.Add(actual.Dato);
+                actual = actual.Siguiente;
+            }
+
+            return resultado;
         }
 
         [HttpPost]

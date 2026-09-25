@@ -28,17 +28,12 @@
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h2>Organización del Catálogo</h2>
-    <a asp-action="Crear" class="btn btn-primary">Agregar Categoría</a>
+    <a asp-action="Crear" class="btn btn-primary">Agregar Categoría o Subcategoría</a>
 </div>
 
 <div class="mb-4">
     <a asp-controller="Categorias" asp-action="GraficoGeneral" class="btn btn-info text-white me-2">Ver Gráfico Global del Catálogo</a>
-    
-    <!-- Botón para graficar los libros de la categoría actual (si se partió de una subcategoría) -->
-    @if (Model != null && Model.Padre != null)
-    {
-        <a asp-controller="Categorias" asp-action="GraficoLibros" asp-route-subcategoria="@Model.Nombre" class="btn btn-warning">Graficar Libros de '@Model.Nombre'</a>
-    }
+    <a asp-controller="Categorias" asp-action="GraficoArbolLibros" class="btn btn-info text-white">Ver AVL global de libros</a>
 </div>
 
 @if (TempData["Exito"] != null) { <div class="alert alert-success">@TempData["Exito"]</div> }
@@ -46,9 +41,57 @@
 
 <div class="card shadow-sm mb-4">
     <div class="card-body">
-        <form asp-action="Index" method="get" class="d-flex">
-            <input type="text" name="subcategoria" class="form-control me-2" placeholder="Nombre de categoría base (dejar vacío para raíz global)" />
-            <button type="submit" class="btn btn-secondary">Partir desde Subcategoría</button>
+        <form asp-action="Index" method="get" class="row g-2">
+            <div class="col-md-8">
+                <label for="subcategoria" class="form-label">Catálogo existente</label>
+                <select id="subcategoria" name="subcategoria" class="form-select">
+                    <option value="">Raíz global</option>
+                    @foreach (var categoria in ViewBag.Categorias)
+                    {
+                        if (ViewBag.CategoriaSeleccionada == categoria.Nombre)
+                        {
+                            <option value="@categoria.Nombre" selected>@categoria.Nombre</option>
+                        }
+                        else
+                        {
+                            <option value="@categoria.Nombre">@categoria.Nombre</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="col-md-4 d-flex align-items-end">
+                <button type="submit" class="btn btn-secondary w-100">Seleccionar catálogo</button>
+            </div>
+        </form>
+        <form asp-controller="Categorias" asp-action="GraficoGeneral" method="get" class="row g-2 mt-3">
+            <div class="col-md-8">
+                <label for="categoriaArbol" class="form-label">Categoría raíz del gráfico jerárquico</label>
+                <select id="categoriaArbol" name="subcategoria" class="form-select">
+                    <option value="">Catálogo global</option>
+                    @foreach (var categoria in ViewBag.Categorias)
+                    {
+                        <option value="@categoria.Nombre">@categoria.Nombre</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-4 d-flex align-items-end">
+                <button type="submit" class="btn btn-info text-white w-100">Graficar categorías</button>
+            </div>
+        </form>
+        <form asp-controller="Categorias" asp-action="GraficoLibros" method="get" class="row g-2 mt-3">
+            <div class="col-md-8">
+                <label for="categoriaGrafico" class="form-label">Categoría para graficar sus libros</label>
+                <select id="categoriaGrafico" name="subcategoria" class="form-select" required>
+                    <option value="">Seleccione una categoría</option>
+                    @foreach (var categoria in ViewBag.Categorias)
+                    {
+                        <option value="@categoria.Nombre">@categoria.Nombre</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-4 d-flex align-items-end">
+                <button type="submit" class="btn btn-warning w-100">Graficar libros</button>
+            </div>
         </form>
     </div>
 </div>

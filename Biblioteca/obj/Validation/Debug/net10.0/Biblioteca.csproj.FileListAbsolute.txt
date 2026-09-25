@@ -1,0 +1,9 @@
+C:\Users\river\OneDrive\Documentos\GitHub\IPC2_Proy02_202602_202400128\Biblioteca\obj\Validation\Debug\net10.0\rpswa.dswa.cache.json
+C:\Users\river\OneDrive\Documentos\GitHub\IPC2_Proy02_202602_202400128\Biblioteca\obj\Validation\Debug\net10.0\Biblioteca.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\river\OneDrive\Documentos\GitHub\IPC2_Proy02_202602_202400128\Biblioteca\obj\Validation\Debug\net10.0\Biblioteca.AssemblyInfoInputs.cache
+C:\Users\river\OneDrive\Documentos\GitHub\IPC2_Proy02_202602_202400128\Biblioteca\obj\Validation\Debug\net10.0\Biblioteca.AssemblyInfo.cs
+C:\Users\river\OneDrive\Documentos\GitHub\IPC2_Proy02_202602_202400128\Biblioteca\obj\Validation\Debug\net10.0\Biblioteca.csproj.CoreCompileInputs.cache
+C:\Users\river\OneDrive\Documentos\GitHub\IPC2_Proy02_202602_202400128\Biblioteca\obj\Validation\Debug\net10.0\Biblioteca.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\river\OneDrive\Documentos\GitHub\IPC2_Proy02_202602_202400128\Biblioteca\obj\Validation\Debug\net10.0\Biblioteca.RazorAssemblyInfo.cache
+C:\Users\river\OneDrive\Documentos\GitHub\IPC2_Proy02_202602_202400128\Biblioteca\obj\Validation\Debug\net10.0\Biblioteca.RazorAssemblyInfo.cs
+C:\Users\river\OneDrive\Documentos\GitHub\IPC2_Proy02_202602_202400128\Biblioteca\obj\Validation\Debug\net10.0\Biblioteca.sourcelink.json

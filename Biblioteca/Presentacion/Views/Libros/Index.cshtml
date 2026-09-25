@@ -56,6 +56,54 @@
     </div>
 </div>
 
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <h5 class="card-title">Filtrar libros</h5>
+        <form asp-action="Index" method="get" class="row g-3">
+            <div class="col-md-5">
+                <label for="categoria" class="form-label">Categoría</label>
+                <select id="categoria" name="categoria" class="form-select">
+                    <option value="">Todas las categorías</option>
+                    @foreach (var categoria in ViewBag.Categorias)
+                    {
+                        if (ViewBag.CategoriaSeleccionada == categoria.Nombre)
+                        {
+                            <option value="@categoria.Nombre" selected>@categoria.Nombre</option>
+                        }
+                        else
+                        {
+                            <option value="@categoria.Nombre">@categoria.Nombre</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="col-md-5">
+                <label for="subcategoria" class="form-label">Subcategoría</label>
+                <select id="subcategoria" name="subcategoria" class="form-select">
+                    <option value="">Todas las subcategorías</option>
+                    @foreach (var categoria in ViewBag.Categorias)
+                    {
+                        if (categoria.Padre != null && categoria.Padre.Padre != null)
+                        {
+                            if (ViewBag.SubcategoriaSeleccionada == categoria.Nombre)
+                            {
+                                <option value="@categoria.Nombre" selected>@categoria.Nombre</option>
+                            }
+                            else
+                            {
+                                <option value="@categoria.Nombre">@categoria.Nombre</option>
+                            }
+                        }
+                    }
+                </select>
+            </div>
+            <div class="col-md-2 d-flex align-items-end">
+                <button type="submit" class="btn btn-secondary w-100">Filtrar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <div class="card shadow-sm">
     <div class="card-body">
         <h5 class="card-title">Libros ordenados por ISBN</h5>

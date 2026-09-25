@@ -9,7 +9,7 @@ namespace Biblioteca.Dominio
     public class Catalogo
     {
         // El nombre no importa: nunca se muestra ni se busca por él.
-        private const string NombreRaiz = "__RAIZ__";
+        private const string NombreRaiz = "Catálogo";
 
         public Categoria Raiz { get; private set; }
 

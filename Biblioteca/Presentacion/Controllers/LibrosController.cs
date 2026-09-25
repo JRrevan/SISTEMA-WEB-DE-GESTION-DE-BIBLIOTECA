@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Biblioteca.Servicios;
+using Biblioteca.Dominio;
+using System.Collections.Generic;
 
 namespace Biblioteca.Presentacion.Controllers
 {
@@ -13,11 +15,27 @@ namespace Biblioteca.Presentacion.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index(long? isbnBusqueda)
+        public IActionResult Index(long? isbnBusqueda, string categoria, string subcategoria)
         {
             var indice = _catalogoService.CatalogoPrincipal.IndiceLibros;
+            var categorias = ObtenerCategorias();
+            Categoria categoriaSeleccionada = null;
 
-            ViewBag.Libros = indice.ObtenerAscendente();
+            if (!string.IsNullOrWhiteSpace(subcategoria))
+            {
+                categoriaSeleccionada = _catalogoService.CatalogoPrincipal.BuscarCategoria(subcategoria);
+            }
+            else if (!string.IsNullOrWhiteSpace(categoria))
+            {
+                categoriaSeleccionada = _catalogoService.CatalogoPrincipal.BuscarCategoria(categoria);
+            }
+
+            ViewBag.Libros = categoriaSeleccionada == null
+                ? indice.ObtenerAscendente()
+                : categoriaSeleccionada.ObtenerLibrosConDescendientes().ObtenerAscendente();
+            ViewBag.Categorias = categorias;
+            ViewBag.CategoriaSeleccionada = categoria;
+            ViewBag.SubcategoriaSeleccionada = subcategoria;
 
             // Requerimiento: Mostrar el menor y el mayor ISBN
             ViewBag.Minimo = indice.Minimo(); 
@@ -37,6 +55,7 @@ namespace Biblioteca.Presentacion.Controllers
         [HttpGet]
         public IActionResult Crear()
         {
+            ViewBag.Categorias = ObtenerCategorias();
             return View();
         }
 
@@ -64,6 +83,21 @@ namespace Biblioteca.Presentacion.Controllers
                 TempData["Error"] = $"No se pudo eliminar el libro. El ISBN {isbn} no existe.";
 
             return RedirectToAction("Index");
+        }
+
+        private List<Categoria> ObtenerCategorias()
+        {
+            var resultado = new List<Categoria>();
+            var categorias = _catalogoService.CatalogoPrincipal.IndiceCategorias.ObtenerOrdenadas();
+            var actual = categorias.Primero;
+
+            while (actual != null)
+            {
+                resultado.Add(actual.Dato);
+                actual = actual.Siguiente;
+            }
+
+            return resultado;
         }
     }
 }

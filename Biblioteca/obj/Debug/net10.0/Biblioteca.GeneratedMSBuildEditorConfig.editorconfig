@@ -31,8 +31,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UHJlc2VudGFjaW9uXFZpZXdzXENhdGVnb3JpYXNcQ3JlYXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/river/OneDrive/Documentos/GitHub/IPC2_Proy02_202602_202400128/Biblioteca/Presentacion/Views/Categorias/GraficoArbolLibros.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJlc2VudGFjaW9uXFZpZXdzXENhdGVnb3JpYXNcR3JhZmljb0FyYm9sTGlicm9zLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/river/OneDrive/Documentos/GitHub/IPC2_Proy02_202602_202400128/Biblioteca/Presentacion/Views/Categorias/GraficoGeneral.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UHJlc2VudGFjaW9uXFZpZXdzXENhdGVnb3JpYXNcR3JhZmljb0dlbmVyYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/river/OneDrive/Documentos/GitHub/IPC2_Proy02_202602_202400128/Biblioteca/Presentacion/Views/Categorias/GraficoLibros.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJlc2VudGFjaW9uXFZpZXdzXENhdGVnb3JpYXNcR3JhZmljb0xpYnJvcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/river/OneDrive/Documentos/GitHub/IPC2_Proy02_202602_202400128/Biblioteca/Presentacion/Views/Categorias/Index.cshtml]

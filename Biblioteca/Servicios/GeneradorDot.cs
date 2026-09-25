@@ -23,19 +23,61 @@ namespace Biblioteca.Servicios
 
         private void GenerarNodosCategoria(Categoria categoria, StringBuilder sb)
         {
-            string idPadre = $"\"{categoria.Nombre}\"";
+            string idPadre = Id(categoria.Nombre);
             if (categoria.Hijos != null && !categoria.Hijos.EstaVacio)
             {
                 ListaCategorias hijos = categoria.Hijos.ObtenerOrdenadas();
                 NodoListaCategoria actual = hijos.Primero;
                 while (actual != null)
                 {
-                    string idHijo = $"\"{actual.Dato.Nombre}\"";
+                    string idHijo = Id(actual.Dato.Nombre);
                     sb.AppendLine($"  {idPadre} -> {idHijo};");
                     GenerarNodosCategoria(actual.Dato, sb);
                     actual = actual.Siguiente;
                 }
             }
+        }
+
+        public string GenerarArbolLibros(ArbolAVLLibros arbol)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("digraph ArbolAVLDeLibros {");
+            sb.AppendLine("  node [shape=record, style=filled, fillcolor=lightyellow, fontname=\"Arial\"];");
+
+            if (arbol != null && !arbol.EstaVacio)
+            {
+                GenerarNodosArbolLibros(arbol.Raiz, sb);
+            }
+            else
+            {
+                sb.AppendLine("  Vacio [label=\"No hay libros en el catálogo\"];");
+            }
+
+            sb.AppendLine("}");
+            return sb.ToString();
+        }
+
+        private void GenerarNodosArbolLibros(NodoAVLLibro nodo, StringBuilder sb)
+        {
+            if (nodo == null) return;
+
+            string idNodo = Id($"libro_{nodo.Dato.Isbn}");
+            sb.AppendLine($"  {idNodo} [label=\"{{ISBN: {nodo.Dato.Isbn} | {Escapar(nodo.Dato.Titulo)}}}\"];");
+
+            if (nodo.Izquierdo != null)
+            {
+                string idIzquierdo = Id($"libro_{nodo.Izquierdo.Dato.Isbn}");
+                sb.AppendLine($"  {idNodo} -> {idIzquierdo} [label=\"Izquierdo\"];");
+            }
+
+            if (nodo.Derecho != null)
+            {
+                string idDerecho = Id($"libro_{nodo.Derecho.Dato.Isbn}");
+                sb.AppendLine($"  {idNodo} -> {idDerecho} [label=\"Derecho\"];");
+            }
+
+            GenerarNodosArbolLibros(nodo.Izquierdo, sb);
+            GenerarNodosArbolLibros(nodo.Derecho, sb);
         }
 
         public string GenerarLibrosAscendente(ArbolAVLLibros arbol, string nombreCategoria)
@@ -54,12 +96,12 @@ namespace Biblioteca.Servicios
 
                 while (actual != null)
                 {
-                    string idNodo = $"\"{actual.Dato.Isbn}\"";
-                    sb.AppendLine($"  {idNodo} [label=\"{{ISBN: {actual.Dato.Isbn} | {actual.Dato.Titulo}}}\"];");
+                    string idNodo = Id($"libro_categoria_{actual.Dato.Isbn}");
+                    sb.AppendLine($"  {idNodo} [label=\"{{ISBN: {actual.Dato.Isbn} | {Escapar(actual.Dato.Titulo)}}}\"];");
                     
                     if (nodoAnterior != null)
                     {
-                        sb.AppendLine($"  {nodoAnterior} -> {idNodo} [color=blue, label=\"Siguiente\"];");
+                        sb.AppendLine($"  {nodoAnterior} -> {idNodo} [color=blue, label=\"ISBN siguiente\"];");
                     }
                     
                     nodoAnterior = idNodo;
@@ -73,6 +115,16 @@ namespace Biblioteca.Servicios
             
             sb.AppendLine("}");
             return sb.ToString();
+        }
+
+        private static string Id(string value)
+        {
+            return $"\"{Escapar(value)}\"";
+        }
+
+        private static string Escapar(string value)
+        {
+            return (value ?? string.Empty).Replace("\\", "\\\\").Replace("\"", "\\\"").Replace("\r", "").Replace("\n", "\\n");
         }
     }
 }

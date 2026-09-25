@@ -1,4 +1,5 @@
 using Biblioteca.Dominio;
+using Biblioteca.TDAs;
 using System;
 
 namespace Biblioteca.Servicios
@@ -23,8 +24,15 @@ namespace Biblioteca.Servicios
 
         public string GenerarGraficoLibrosCategoria(Categoria categoria)
         {
-            string dotContent = _generadorDot.GenerarLibrosAscendente(categoria.Libros, categoria.Nombre);
+            string dotContent = _generadorDot.GenerarLibrosAscendente(categoria.ObtenerLibrosConDescendientes(), categoria.Nombre);
             string fileName = $"libros_{Guid.NewGuid()}";
+            return _ejecutorGraphviz.GenerarImagenSvg(dotContent, fileName);
+        }
+
+        public string GenerarGraficoArbolLibros(ArbolAVLLibros arbol)
+        {
+            string dotContent = _generadorDot.GenerarArbolLibros(arbol);
+            string fileName = $"avl_libros_{Guid.NewGuid()}";
             return _ejecutorGraphviz.GenerarImagenSvg(dotContent, fileName);
         }
     }
