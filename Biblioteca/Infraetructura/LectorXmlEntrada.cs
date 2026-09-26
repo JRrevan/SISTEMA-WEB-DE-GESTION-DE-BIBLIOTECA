@@ -2,11 +2,19 @@ using System;
 using System.IO;
 using System.Xml.Linq;
 using Biblioteca.Dominio;
+using Biblioteca.Infraestructura;
 
 namespace Biblioteca.Servicios
 {
     public class LectorXmlEntrada
     {
+        private class NodoCategoriaPendiente
+        {
+            public string Nombre;
+            public string NombrePadre;
+            public NodoCategoriaPendiente Siguiente;
+        }
+
         public ResultadoCarga Procesar(Stream xmlStream, Catalogo catalogo)
         {
             ResultadoCarga resultado = new ResultadoCarga();
@@ -22,28 +30,71 @@ namespace Biblioteca.Servicios
                     return resultado;
                 }
 
-                // 1. Procesar Categorías (Carga incremental)
+                // 1. Procesar Categorías con linking diferido
                 XElement listaCategorias = config.Element("listaCategorias");
                 if (listaCategorias != null)
                 {
+                    NodoCategoriaPendiente pendientes = null;
+                    NodoCategoriaPendiente ultimo = null;
                     foreach (XElement catNode in listaCategorias.Elements("categoria"))
                     {
                         string nombreCategoria = catNode.Value.Trim();
                         XAttribute attrPadre = catNode.Attribute("padre");
-                        
-                        // El atributo padre es opcional
                         string nombrePadre = attrPadre != null ? attrPadre.Value.Trim() : "";
 
-                        bool exito = catalogo.AgregarCategoria(nombreCategoria, nombrePadre);
-                        
-                        if (!exito)
+                        NodoCategoriaPendiente nueva = new NodoCategoriaPendiente
                         {
-                            resultado.AgregarMensaje($"Error: No se pudo agregar la categoría '{nombreCategoria}'. Posible duplicado o padre '{nombrePadre}' inexistente.");
-                        }
-                        else
+                            Nombre = nombreCategoria,
+                            NombrePadre = nombrePadre
+                        };
+
+                        if (pendientes == null) pendientes = nueva;
+                        else ultimo.Siguiente = nueva;
+                        ultimo = nueva;
+                    }
+
+                    bool huboCambios;
+                    do
+                    {
+                        huboCambios = false;
+                        NodoCategoriaPendiente anterior = null;
+                        NodoCategoriaPendiente actual = pendientes;
+
+                        while (actual != null)
                         {
-                            resultado.AgregarMensaje($"Éxito: Categoría '{nombreCategoria}' registrada correctamente.");
+                            NodoCategoriaPendiente siguiente = actual.Siguiente;
+                            bool nombreDuplicado = catalogo.BuscarCategoria(actual.Nombre) != null;
+                            bool padrePendiente = !string.IsNullOrWhiteSpace(actual.NombrePadre)
+                                && catalogo.BuscarCategoria(actual.NombrePadre) == null;
+
+                            if (nombreDuplicado || !padrePendiente && catalogo.AgregarCategoria(actual.Nombre, actual.NombrePadre))
+                            {
+                                if (nombreDuplicado)
+                                {
+                                    resultado.AgregarMensaje($"Error: No se pudo agregar la categoría '{actual.Nombre}'. Posible duplicado o padre '{actual.NombrePadre}' inexistente.");
+                                }
+                                else
+                                {
+                                    resultado.AgregarMensaje($"Éxito: Categoría '{actual.Nombre}' registrada correctamente.");
+                                }
+
+                                if (anterior == null) pendientes = siguiente;
+                                else anterior.Siguiente = siguiente;
+                                huboCambios = true;
+                            }
+                            else
+                            {
+                                anterior = actual;
+                            }
+
+                            actual = siguiente;
                         }
+                    } while (huboCambios);
+
+                    while (pendientes != null)
+                    {
+                        resultado.AgregarMensaje($"Error: No se pudo agregar la categoría '{pendientes.Nombre}'. Posible duplicado o padre '{pendientes.NombrePadre}' inexistente.");
+                        pendientes = pendientes.Siguiente;
                     }
                 }
 
@@ -58,11 +109,13 @@ namespace Biblioteca.Servicios
                         string autor = libNode.Element("autor")?.Value.Trim() ?? "Desconocido";
                         string nombreCategoria = libNode.Element("categoria")?.Value.Trim() ?? "";
 
-                        if (!long.TryParse(valorIsbn, out long isbn))
+                        if (!Validador.EsIsbnValido(valorIsbn))
                         {
                             resultado.AgregarMensaje("Error: Un libro tiene un formato de ISBN inválido (debe ser numérico).");
                             continue;
                         }
+
+                        long isbn = Validador.ConvertirIsbn(valorIsbn);
 
                         bool exito = catalogo.AgregarLibro(isbn, titulo, autor, nombreCategoria);
 

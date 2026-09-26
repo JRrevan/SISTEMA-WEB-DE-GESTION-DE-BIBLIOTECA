@@ -1,0 +1,34 @@
+Biblioteca/                              proyecto web C# (ASP.NET Core MVC)
+│
+├── CAPA 1 · PRESENTACIÓN
+│   ├── Controllers/
+│   │   ├── HomeController         menú principal, inicialización y Ayuda
+│   │   ├── CargaController        carga incremental de XML
+│   │   ├── CategoriasController   estructura, gráficos (Graphviz), agregar categoría
+│   │   └── LibrosController       registrar, eliminar, buscar por ISBN, menor/mayor
+│   ├── Views/                     una vista por pantalla + _Layout
+│   └── wwwroot/graficos/          imágenes SVG generadas por Graphviz
+│
+├── CAPA 2 · SERVICIOS
+│   ├── CatalogoService             singleton: guarda el Catalogo en memoria
+│   ├── CargaXmlService              orquesta la carga incremental de un XML
+│   └── GraphvizService              arma el DOT y genera la imagen SVG
+│
+├── CAPA 3 · DOMINIO
+│   ├── Catalogo                     raíz virtual + índices globales (categorías y libros)
+│   ├── Categoria                    nombre, padre, hijos (AVL), libros propios (AVL)
+│   ├── Libro                        isbn (long), título, autor, categoría
+│   └── ResultadoCarga               lista de mensajes de éxito/error de una carga
+│
+├── CAPA 4 · TDAs
+│   ├── NodoAVLLibro / ArbolAVLLibros           clave ISBN: insertar, buscar, eliminar, min, max, inorden
+│   ├── NodoAVLCategoria / ArbolAVLCategorias   clave nombre: insertar, buscar, inorden alfabético
+│   ├── NodoListaLibro / ListaLibros            lista simple, orden ascendente por ISBN
+│   ├── NodoListaCategoria / ListaCategorias    lista simple, orden alfabético
+│   └── NodoMensaje / ListaMensajes             lista simple de mensajes de carga
+│
+└── CAPA 5 · INFRAESTRUCTURA
+    ├── LectorXmlEntrada             recorre el XML y aplica los cambios al Catalogo
+    ├── GeneradorDot                 arma el texto DOT (estructura y libros por categoría)
+    ├── EjecutorGraphviz             lanza el ejecutable `dot` con Process
+    └── Validador                    ISBN numérico, textos no vacíos, comparación alfabética

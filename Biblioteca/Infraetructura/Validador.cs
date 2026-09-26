@@ -10,8 +10,7 @@ namespace Biblioteca.Infraestructura
             return !string.IsNullOrWhiteSpace(texto);
         }
 
-        /// Un ISBN es válido si el texto representa un enteropositivo. Se usa antes de convertir a long, porque el XML
-        /// siempre trae el ISBN como texto.
+        /// Un ISBN es válido si el texto representa un entero positivo dentro del rango de int.
         public static bool EsIsbnValido(string textoIsbn)
         {
             if (string.IsNullOrWhiteSpace(textoIsbn)) return false;
@@ -22,8 +21,7 @@ namespace Biblioteca.Infraestructura
                 if (t[i] < '0' || t[i] > '9') return false;
             }
 
-            // Todo dígitos, pero puede desbordar long (más de 19 dígitos).
-            return long.TryParse(t, out long valor) && valor > 0;
+            return int.TryParse(t, out int valor) && valor > 0;
         }
 
         ///Convierte un ISBN ya validado con EsIsbnValido a long. Si el texto no es válido, devuelve 0.
