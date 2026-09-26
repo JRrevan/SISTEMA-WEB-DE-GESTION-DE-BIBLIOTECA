@@ -64,8 +64,10 @@
                 <label for="categoria" class="form-label">Categoría</label>
                 <select id="categoria" name="categoria" class="form-select">
                     <option value="">Todas las categorías</option>
-                    @foreach (var categoria in ViewBag.Categorias)
+                    @{ var nodoCategoria = ViewBag.Categorias.Primero; }
+                    @while (nodoCategoria != null)
                     {
+                        var categoria = nodoCategoria.Dato;
                         if (categoria.Padre != null && categoria.Padre.Padre == null)
                         {
                             if (ViewBag.CategoriaSeleccionada == categoria.Nombre)
@@ -77,6 +79,7 @@
                                 <option value="@categoria.Nombre">@categoria.Nombre</option>
                             }
                         }
+                        nodoCategoria = nodoCategoria.Siguiente;
                     }
                 </select>
             </div>
@@ -84,8 +87,10 @@
                 <label for="subcategoria" class="form-label">Subcategoría</label>
                 <select id="subcategoria" name="subcategoria" class="form-select">
                     <option value="">Todas las subcategorías</option>
-                    @foreach (var categoria in ViewBag.Categorias)
+                    @{ var nodoSubcategoria = ViewBag.Categorias.Primero; }
+                    @while (nodoSubcategoria != null)
                     {
+                        var categoria = nodoSubcategoria.Dato;
                         if (categoria.Padre != null && categoria.Padre.Padre != null)
                         {
                             if (ViewBag.SubcategoriaSeleccionada == categoria.Nombre)
@@ -97,6 +102,7 @@
                                 <option value="@categoria.Nombre">@categoria.RutaCompleta</option>
                             }
                         }
+                        nodoSubcategoria = nodoSubcategoria.Siguiente;
                     }
                 </select>
             </div>

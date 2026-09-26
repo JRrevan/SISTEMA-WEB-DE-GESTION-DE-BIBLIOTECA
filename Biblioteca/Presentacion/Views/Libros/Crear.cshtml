@@ -27,9 +27,12 @@
                         <label for="categoria" class="form-label">Categoría o subcategoría</label>
                         <select id="categoria" name="categoria" class="form-select" required>
                             <option value="">Seleccione una categoría</option>
-                            @foreach (var categoria in ViewBag.Categorias)
+                            @{ var nodoCategoria = ViewBag.Categorias.Primero; }
+                            @while (nodoCategoria != null)
                             {
+                                var categoria = nodoCategoria.Dato;
                                 <option value="@categoria.Nombre">@(categoria.Padre != null && categoria.Padre.Padre != null ? "↳ " : "")@categoria.Nombre</option>
+                                nodoCategoria = nodoCategoria.Siguiente;
                             }
                         </select>
                     </div>

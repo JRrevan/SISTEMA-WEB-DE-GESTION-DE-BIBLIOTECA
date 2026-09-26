@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Biblioteca.Servicios;
 using Biblioteca.Dominio;
-using System.Collections.Generic;
+using Biblioteca.TDAs;
 
 namespace Biblioteca.Presentacion.Controllers
 {
@@ -96,19 +96,9 @@ namespace Biblioteca.Presentacion.Controllers
             return View();
         }
 
-        private List<Categoria> ObtenerCategorias()
+        private ListaCategorias ObtenerCategorias()
         {
-            var resultado = new List<Categoria>();
-            var categorias = _catalogoService.CatalogoPrincipal.IndiceCategorias.ObtenerOrdenadas();
-            var actual = categorias.Primero;
-
-            while (actual != null)
-            {
-                resultado.Add(actual.Dato);
-                actual = actual.Siguiente;
-            }
-
-            return resultado;
+            return _catalogoService.CatalogoPrincipal.IndiceCategorias.ObtenerOrdenadas();
         }
 
         [HttpPost]

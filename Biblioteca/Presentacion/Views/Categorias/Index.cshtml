@@ -46,8 +46,10 @@
                 <label for="subcategoria" class="form-label">Catálogo existente</label>
                 <select id="subcategoria" name="subcategoria" class="form-select">
                     <option value="">Raíz global</option>
-                    @foreach (var categoria in ViewBag.Categorias)
+                    @{ var nodoCategoria = ViewBag.Categorias.Primero; }
+                    @while (nodoCategoria != null)
                     {
+                        var categoria = nodoCategoria.Dato;
                         if (ViewBag.CategoriaSeleccionada == categoria.Nombre)
                         {
                             <option value="@categoria.Nombre" selected>@categoria.Nombre</option>
@@ -56,6 +58,7 @@
                         {
                             <option value="@categoria.Nombre">@categoria.Nombre</option>
                         }
+                        nodoCategoria = nodoCategoria.Siguiente;
                     }
                 </select>
             </div>
@@ -68,9 +71,12 @@
                 <label for="categoriaArbol" class="form-label">Categoría raíz del gráfico jerárquico</label>
                 <select id="categoriaArbol" name="subcategoria" class="form-select">
                     <option value="">Catálogo global</option>
-                    @foreach (var categoria in ViewBag.Categorias)
+                    @{ var nodoCategoriaGrafico = ViewBag.Categorias.Primero; }
+                    @while (nodoCategoriaGrafico != null)
                     {
+                        var categoria = nodoCategoriaGrafico.Dato;
                         <option value="@categoria.Nombre">@categoria.Nombre</option>
+                        nodoCategoriaGrafico = nodoCategoriaGrafico.Siguiente;
                     }
                 </select>
             </div>
@@ -83,9 +89,12 @@
                 <label for="categoriaGrafico" class="form-label">Categoría para graficar sus libros</label>
                 <select id="categoriaGrafico" name="subcategoria" class="form-select" required>
                     <option value="">Seleccione una categoría</option>
-                    @foreach (var categoria in ViewBag.Categorias)
+                    @{ var nodoCategoriaLibros = ViewBag.Categorias.Primero; }
+                    @while (nodoCategoriaLibros != null)
                     {
+                        var categoria = nodoCategoriaLibros.Dato;
                         <option value="@categoria.Nombre">@categoria.Nombre</option>
+                        nodoCategoriaLibros = nodoCategoriaLibros.Siguiente;
                     }
                 </select>
             </div>
