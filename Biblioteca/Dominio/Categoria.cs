@@ -8,6 +8,17 @@ namespace Biblioteca.Dominio
     {
         public string Nombre { get; }
 
+        public string RutaCompleta
+        {
+            get
+            {
+                if (Padre == null || Padre.Padre == null)
+                    return Nombre;
+
+                return $"{Padre.RutaCompleta} > {Nombre}";
+            }
+        }
+
         // Null solo para la raíz virtual del Catalogo, que no tiene padre.
         public Categoria Padre { get; }
 

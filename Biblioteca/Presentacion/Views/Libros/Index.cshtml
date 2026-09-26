@@ -38,7 +38,7 @@
                             <strong>ISBN:</strong> @ViewBag.LibroBuscado.Isbn <br/>
                             <strong>Título:</strong> @ViewBag.LibroBuscado.Titulo <br/>
                             <strong>Autor:</strong> @ViewBag.LibroBuscado.Autor <br/>
-                            <strong>Categoría:</strong> @ViewBag.LibroBuscado.Categoria.Nombre
+                            <strong>Categoría:</strong> @ViewBag.LibroBuscado.Categoria.RutaCompleta
                             
                             <form asp-action="Eliminar" method="post" class="mt-2" onsubmit="return confirm('¿Eliminar este libro definitivamente?');">
                                 <input type="hidden" name="isbn" value="@ViewBag.LibroBuscado.Isbn" />
@@ -66,13 +66,16 @@
                     <option value="">Todas las categorías</option>
                     @foreach (var categoria in ViewBag.Categorias)
                     {
-                        if (ViewBag.CategoriaSeleccionada == categoria.Nombre)
+                        if (categoria.Padre != null && categoria.Padre.Padre == null)
                         {
-                            <option value="@categoria.Nombre" selected>@categoria.Nombre</option>
-                        }
-                        else
-                        {
-                            <option value="@categoria.Nombre">@categoria.Nombre</option>
+                            if (ViewBag.CategoriaSeleccionada == categoria.Nombre)
+                            {
+                                <option value="@categoria.Nombre" selected>@categoria.Nombre</option>
+                            }
+                            else
+                            {
+                                <option value="@categoria.Nombre">@categoria.Nombre</option>
+                            }
                         }
                     }
                 </select>
@@ -87,11 +90,11 @@
                         {
                             if (ViewBag.SubcategoriaSeleccionada == categoria.Nombre)
                             {
-                                <option value="@categoria.Nombre" selected>@categoria.Nombre</option>
+                                <option value="@categoria.Nombre" selected>@categoria.RutaCompleta</option>
                             }
                             else
                             {
-                                <option value="@categoria.Nombre">@categoria.Nombre</option>
+                                <option value="@categoria.Nombre">@categoria.RutaCompleta</option>
                             }
                         }
                     }
@@ -127,7 +130,7 @@
                                 <td>@actual.Dato.Isbn</td>
                                 <td>@actual.Dato.Titulo</td>
                                 <td>@actual.Dato.Autor</td>
-                                <td>@actual.Dato.Categoria.Nombre</td>
+                                <td>@actual.Dato.Categoria.RutaCompleta</td>
                             </tr>
                             actual = actual.Siguiente;
                         }
