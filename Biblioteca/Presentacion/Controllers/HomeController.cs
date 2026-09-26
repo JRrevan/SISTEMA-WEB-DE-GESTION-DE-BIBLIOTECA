@@ -6,11 +6,13 @@ namespace Biblioteca.Controllers
     public class HomeController : Controller
     {
         private readonly CatalogoService _catalogoService;
+        private readonly IWebHostEnvironment _environment;
 
         // El constructor tiene singleton
-        public HomeController(CatalogoService catalogoService)
+        public HomeController(CatalogoService catalogoService, IWebHostEnvironment environment)
         {
             _catalogoService = catalogoService;
+            _environment = environment;
         }
 
         // Esta acción muestra la página principal
@@ -40,6 +42,17 @@ namespace Biblioteca.Controllers
         public IActionResult Ayuda()
         {
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult Documento()
+        {
+            var documento = Path.Combine(
+                _environment.ContentRootPath,
+                "Docs",
+                "Ensayo-IPC2-lab _202400128.pdf");
+
+            return PhysicalFile(documento, "application/pdf");
         }
 
     }
