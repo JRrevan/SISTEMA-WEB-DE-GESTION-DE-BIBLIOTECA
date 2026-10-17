@@ -39,8 +39,6 @@ C:\Temp\BibliotecaValidation\Biblioteca.deps.json
 C:\Temp\BibliotecaValidation\Biblioteca.runtimeconfig.json
 C:\Temp\BibliotecaValidation\Biblioteca.dll
 C:\Temp\BibliotecaValidation\Biblioteca.pdb
-C:\Users\river\OneDrive\Documentos\GitHub\IPC2_Proy02_202602_202400128\Biblioteca\obj\Debug\net10.0\compressed\i8lzv26j8t-{0}-o13bpn99be-o13bpn99be.gz
-C:\Users\river\OneDrive\Documentos\GitHub\IPC2_Proy02_202602_202400128\Biblioteca\obj\Debug\net10.0\compressed\es0s0m3odj-{0}-x1em3ki45i-x1em3ki45i.gz
 C:\Users\river\AppData\Local\Temp\BibliotecaValidation\Biblioteca.staticwebassets.runtime.json
 C:\Users\river\AppData\Local\Temp\BibliotecaValidation\Biblioteca.staticwebassets.endpoints.json
 C:\Users\river\AppData\Local\Temp\BibliotecaValidation\Biblioteca.deps.json
