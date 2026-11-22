@@ -1,0 +1,17 @@
+# Compilación
+bin/
+obj/
+
+# Visual Studio / Rider / VS Code
+.vs/
+.idea/
+.vscode/
+*.user
+*.suo
+
+# Gráficos generados por Graphviz en tiempo de ejecución
+Biblioteca/wwwroot/graficos/
+
+# Sistema operativo
+Thumbs.db
+.DS_Store
